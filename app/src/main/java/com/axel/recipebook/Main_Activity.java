@@ -26,9 +26,9 @@ import java.util.ArrayList;
  */
 public class Main_Activity extends AppCompatActivity {
     ArrayList<Recipe> recipes;
+    ArrayAdapter<Recipe> adapter;
     int deletionIndex = -1;
     File deletionFile;
-    ArrayAdapter<Recipe> adapter;
 
     /**
      * Called when the activity is created.
