@@ -1,9 +1,11 @@
 package com.axel.recipebook;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -74,5 +76,11 @@ public class RecipeViewer_Activity extends AppCompatActivity {
         tr.addView(cb);
 
         table.addView(tr);
+    }
+
+    public void onClickEditRecipe(View view) {
+        Intent intent = new Intent(this, EditRecipe_Activity.class);
+        intent.putExtra("Recipe", viewedRecipe);
+        startActivity(intent);
     }
 }

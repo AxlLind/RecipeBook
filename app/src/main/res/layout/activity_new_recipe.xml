@@ -24,7 +24,7 @@
         android:layout_alignParentEnd="true"
         android:hint="Recipe Name"
         android:textAllCaps="false" />
-s
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -52,7 +52,7 @@ s
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/NewRecipe_Ingredient1_Name"
-                    android:hint="Ingredient 1" />
+                    android:hint="Ingredient" />
 
                 <EditText
                     android:layout_height="wrap_content"
@@ -74,7 +74,7 @@ s
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/NewRecipe_Ingredient2_Name"
-                    android:hint="Ingredient 2" />
+                    android:hint="Ingredient" />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -95,7 +95,7 @@ s
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/NewRecipe_Ingredent3_Name"
-                    android:hint="Ingredient 3" />
+                    android:hint="Ingredient" />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -117,7 +117,7 @@ s
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/NewRecipe_Ingredent4_Name"
-                    android:hint="Ingredient 4" />
+                    android:hint="Ingredient" />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -139,7 +139,7 @@ s
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/NewRecipe_Ingredent5_Name"
-                    android:hint="Ingredient 5" />
+                    android:hint="Ingredient" />
 
                 <EditText
                     android:layout_width="wrap_content"

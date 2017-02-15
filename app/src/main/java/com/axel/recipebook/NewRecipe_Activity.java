@@ -83,10 +83,8 @@ public class NewRecipe_Activity extends AppCompatActivity {
      * @param view
      */
     public void addIngredientRow(View view) {
-        TableLayout table = (TableLayout) findViewById(R.id.NewRecipe_InputTable);
-
         EditText ingredientName = new EditText(this);
-        ingredientName.setHint("Ingredient " + (table.getChildCount() + 1));
+        ingredientName.setHint("Ingredient");
         EditText ingredientAmount = new EditText(this);
         ingredientAmount.setHint("Amount");
 
@@ -94,6 +92,7 @@ public class NewRecipe_Activity extends AppCompatActivity {
         tr.addView(ingredientName);
         tr.addView(ingredientAmount);
 
+        TableLayout table = (TableLayout) findViewById(R.id.NewRecipe_InputTable);
         table.addView(tr);
     }
 

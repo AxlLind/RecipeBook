@@ -23,6 +23,7 @@
         <activity
             android:name=".RecipeViewer_Activity"
             android:screenOrientation="portrait" />
+        <activity android:name=".EditRecipe_Activity"></activity>
     </application>
 
 </manifest>

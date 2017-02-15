@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Main page of the app. Contains a list of the users saved recipes.
@@ -52,6 +53,7 @@ public class Main_Activity extends AppCompatActivity {
         for (String recipeName : recipeDir.list()) {
             recipes.add( new Recipe(this, recipeName) );
         }
+        Collections.sort(recipes);
 
         ListView lv = (ListView) findViewById(R.id.Main_RecipeList);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipes);
@@ -60,9 +62,9 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     /**
-     * Is called when clicking the "create new recipe"-button
+     * Called when clicking the "create new recipe"-button
      * Simply changes activity to the NewRecipe_Activity.
-     * Does nothing extra.
+     * Does nothing beyond that.
      *
      * @param view
      */

@@ -5,9 +5,9 @@ import android.content.Context;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ import java.util.ArrayList;
  *
  * @author Axel Lindeberg
  */
-public class Recipe implements Serializable{
+public class Recipe implements Serializable, Comparable<Recipe> {
     private String name;
     private ArrayList<Ingredient> ingredients;
 
@@ -64,6 +64,10 @@ public class Recipe implements Serializable{
      */
     public ArrayList<Ingredient> getIngredients() {
         return ingredients;
+    }
+
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
     /**
@@ -130,5 +134,10 @@ public class Recipe implements Serializable{
      */
     @Override public String toString() {
         return this.name;
+    }
+
+    @Override
+    public int compareTo(Recipe recipe) {
+        return name.compareTo(recipe.getName());
     }
 }
