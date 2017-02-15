@@ -64,13 +64,11 @@ public class Main_Activity extends AppCompatActivity {
     /**
      * Called when clicking the "create new recipe"-button
      * Simply changes activity to the NewRecipe_Activity.
-     * Does nothing beyond that.
      *
      * @param view
      */
     public void onClickNewRecipe(View view) {
-        Intent intent = new Intent(this, NewRecipe_Activity.class);
-        startActivity(intent);
+        startActivity( new Intent(this, NewRecipe_Activity.class) );
     }
 
     /**

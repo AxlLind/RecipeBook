@@ -12,9 +12,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * A recipe object which contains the name of the recipe
- * as well as any number of ingredients.
- * Implements Serializable. Can be saved to a file as well
+ * A recipe object which contains the name of the recipe as well as any
+ * number of ingredients. Implements Serializable. Can be saved to a file as well
  * as read from a file.
  *
  * @author Axel Lindeberg
@@ -66,7 +65,13 @@ public class Recipe implements Serializable, Comparable<Recipe> {
         return ingredients;
     }
 
-    public void setIngredients(ArrayList<Ingredient> ingredients) {
+    /**
+     * Takes in an array list of ingredients and overwrites the recipe's current
+     * array list of ingredients.
+     *
+     * @param ingredients - new array list of ingredients
+     */
+    public void setNewIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -82,7 +87,8 @@ public class Recipe implements Serializable, Comparable<Recipe> {
 
     /**
      * Creates a file with the name of the recipe's name.
-     * Outputs the object via ObjectOutputStream. Catches IOException.
+     * Outputs the object via ObjectOutputStream.
+     * Saves to [current directory]/recipes/
      *
      * @param ctx
      */
@@ -105,7 +111,7 @@ public class Recipe implements Serializable, Comparable<Recipe> {
 
     /**
      * Reads in a recipe object from a saved file and sets this recipe
-     * equal to the read in recipe.
+     * equal to the read in recipe. Reads from [current directory]/recipes/
      *
      * @param fileName name of file to be read
      * @param ctx
@@ -136,6 +142,13 @@ public class Recipe implements Serializable, Comparable<Recipe> {
         return this.name;
     }
 
+    /**
+     * Implements the compareTo method, comparing on the name of the recipe.
+     * Uses the String class' compare to method.
+     *
+     * @param recipe - recipe comparing against
+     * @return
+     */
     @Override
     public int compareTo(Recipe recipe) {
         return name.compareTo(recipe.getName());

@@ -72,9 +72,7 @@ public class NewRecipe_Activity extends AppCompatActivity {
             return;
         }
         r.saveToFile(this);
-
-        Intent intent = new Intent(this, Main_Activity.class);
-        startActivity(intent);
+        startActivity( new Intent(this, Main_Activity.class) );
     }
 
     /**
