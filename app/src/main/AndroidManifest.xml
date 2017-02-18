@@ -23,7 +23,10 @@
         <activity
             android:name=".RecipeViewer_Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".EditRecipe_Activity"></activity>
+        <activity android:name=".EditRecipe_Activity" />
+        <activity android:name=".ShareRecipe_Activity" />
+        <activity android:name=".Share_Receive_Activity" />
+        <activity android:name=".ReceiveRecipe_Activity"></activity>
     </application>
 
 </manifest>

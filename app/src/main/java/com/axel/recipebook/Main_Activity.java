@@ -50,10 +50,10 @@ public class Main_Activity extends AppCompatActivity {
         if (!recipeDir.exists()) {
             recipeDir.mkdir();
         }
-        for (String recipeName : recipeDir.list()) {
-            recipes.add( new Recipe(this, recipeName) );
+        for (String s : recipeDir.list()) {
+            recipes.add( new Recipe(this, s) );
         }
-        Collections.sort(recipes);
+        //Collections.sort(recipes);
 
         ListView lv = (ListView) findViewById(R.id.Main_RecipeList);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipes);
@@ -69,6 +69,16 @@ public class Main_Activity extends AppCompatActivity {
      */
     public void onClickNewRecipe(View view) {
         startActivity( new Intent(this, NewRecipe_Activity.class) );
+    }
+
+    /**
+     * Called when clicking the "share recipe"-button
+     * Simply changes activity to the ShareRecipe_Activity.
+     *
+     * @param view
+     */
+    public void onClickShareRecipe(View view) {
+        startActivity( new Intent(this, Share_Receive_Activity.class) );
     }
 
     /**

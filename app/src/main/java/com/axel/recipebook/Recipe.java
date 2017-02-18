@@ -26,6 +26,14 @@ public class Recipe implements Serializable, Comparable<Recipe> {
     static final long serialVersionUID = -5660726973683173084L;
 
     /**
+     * Only for reading in from FireBase. Not meant to be used since it
+     * does not initialize the name variable.
+     */
+    public Recipe() {
+        this.name = "";
+    }
+
+    /**
      * Regular constructor. Takes in the name of the recipe.
      * Ingredients have to be added later.
      *
@@ -151,6 +159,6 @@ public class Recipe implements Serializable, Comparable<Recipe> {
      */
     @Override
     public int compareTo(Recipe recipe) {
-        return name.compareTo(recipe.getName());
+        return this.name.compareTo(recipe.getName());
     }
 }

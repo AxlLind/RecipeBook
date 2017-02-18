@@ -16,6 +16,11 @@ public class Ingredient implements Serializable{
     private final String name;
     private final String amount;
 
+    public Ingredient() {
+        this.name = "";
+        this.amount = "";
+    }
+
     public Ingredient(String name, String amount) {
         this.name = name;
         this.amount = amount;

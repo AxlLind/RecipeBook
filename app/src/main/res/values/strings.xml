@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">RecipeBook</string>
     <string name="create_recipe">Create New Recipe</string>
+    <string name="share_instructions">Select the recipe you want to share. Enter a download code.
+    Your friend downloading the recipe will have to enter the same download code to receive it!</string>
+    <string name="receive_instrutions">Your friend sharing the recipe will have to upload it before
+    you try to download it. Enter the same download code as the one your friend entered.</string>
 </resources>
