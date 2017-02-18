@@ -1,6 +1,7 @@
 package com.axel.recipebook;;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,8 +27,7 @@ public class Recipe implements Serializable, Comparable<Recipe> {
     static final long serialVersionUID = -5660726973683173084L;
 
     /**
-     * Only for reading in from FireBase. Not meant to be used since it
-     * does not initialize the name variable.
+     * Only for reading in from FireBase. Not meant to be used.
      */
     public Recipe() {
         this.name = "";
@@ -51,8 +51,8 @@ public class Recipe implements Serializable, Comparable<Recipe> {
      * @param fileName name of the file to be read
      * @param ctx
      */
-    public Recipe(Context ctx, String fileName) {
-        this.readFromFile(fileName, ctx);
+    public Recipe(File f) {
+        this.readFromFile(f);
     }
 
     /**
@@ -90,7 +90,7 @@ public class Recipe implements Serializable, Comparable<Recipe> {
      * @param amount amount of the ingredient
      */
     public void addIngredient(String name, String amount) {
-        ingredients.add(new Ingredient(name, amount));
+        ingredients.add( new Ingredient(name, amount) );
     }
 
     /**
@@ -101,7 +101,7 @@ public class Recipe implements Serializable, Comparable<Recipe> {
      * @param ctx
      */
     public void saveToFile(Context ctx) {
-        if (name.equals(null)) {
+        if (name == null) {
             return;
         }
         try {
@@ -121,17 +121,11 @@ public class Recipe implements Serializable, Comparable<Recipe> {
      * Reads in a recipe object from a saved file and sets this recipe
      * equal to the read in recipe. Reads from [current directory]/recipes/
      *
-     * @param fileName name of file to be read
-     * @param ctx
+     * @param file - file containing recipe object
      */
-    private void readFromFile(String fileName, Context ctx) {
+    private void readFromFile(File file) {
         try {
-            String filePath = ctx.getFilesDir() + "/recipes/" + fileName;
-            File recipe = new File(filePath);
-
-            FileInputStream fis = new FileInputStream(recipe);
-
-            ObjectInputStream ois = new ObjectInputStream(fis);
+            ObjectInputStream ois = new ObjectInputStream( new FileInputStream(file) );
             Recipe r = (Recipe) ois.readObject();
             ois.close();
             this.name = r.name;
@@ -158,7 +152,7 @@ public class Recipe implements Serializable, Comparable<Recipe> {
      * @return
      */
     @Override
-    public int compareTo(Recipe recipe) {
+    public int compareTo(@NonNull Recipe recipe) {
         return this.name.compareTo(recipe.getName());
     }
 }

@@ -14,11 +14,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * An activity where the user receive a recipe from a friend.
+ * The friend first has to first upload their recipe to the database (via the ShareRecipe_Activity).
+ * Works via a firebase database which the user reads the recipe from.
+ *
+ * User has to fill in a download code which the other user enters when uploading the recipe.
+ *
+ * @author Axel Lindeberg
+ */
 public class ReceiveRecipe_Activity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference dataref;
     String dlName;
 
+    /**
+     * Called when activity is created.
+     * Grabs a reference to the firebase database.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +43,22 @@ public class ReceiveRecipe_Activity extends AppCompatActivity {
         dataref = database.getReference();
     }
 
+    /**
+     * Called when clicking the "Download Recipe"-button.
+     * Checks if the user has entered a download code, shows error dialog if not.
+     * Checks the database for the download code, shows error dialog if it cannot find
+     * the download code.
+     *
+     * If it passes the tests above it downloads and saves the recipe from the database
+     * and the deletes the recipe from the database.
+     *
+     * @param view
+     */
     public void onClickDownload(View view) {
         EditText et = (EditText) findViewById(R.id.DownloadName_ReceiveActvitiy);
         dlName = et.getText().toString().trim();
         if (dlName.equals("")) {
-            showErrorDialog("Error downloading", "You have need to specify a download code.");
+            showErrorDialog("Error downloading", getString(R.string.downloadError_NoDLName));
             return;
         }
 
@@ -41,11 +67,11 @@ public class ReceiveRecipe_Activity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Recipe r = dataSnapshot.getValue(Recipe.class);
                 if (r == null) {
-                    showErrorDialog("Error downloading", "Cannot find recipe in database. Make sure the other user sends it first.");
+                    showErrorDialog("Error downloading", getString(R.string.downloadError_NoRecipe));
                     return;
                 }
                 r.saveToFile(ReceiveRecipe_Activity.this);
-                dataref.child("sendingHub").child(dlName).removeValue();
+                dataref.child(dlName).removeValue();
                 showSuccessDialog(r.getName());
             }
 
@@ -55,9 +81,15 @@ public class ReceiveRecipe_Activity extends AppCompatActivity {
             }
         };
 
-        dataref.child("sendingHub").child(dlName).addListenerForSingleValueEvent(listener);
+        dataref.child(dlName).addListenerForSingleValueEvent(listener);
     }
 
+    /**
+     * Shows an error dialog on the screen.
+     *
+     * @param title title of the dialog
+     * @param msg message of the dialog
+     */
     private void showErrorDialog(String title, String msg) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(title);
@@ -66,6 +98,11 @@ public class ReceiveRecipe_Activity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Shows a dialog when the recipe was successfully downloaded.
+     *
+     * @param recipeName
+     */
     private void showSuccessDialog(String recipeName) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
@@ -76,7 +113,7 @@ public class ReceiveRecipe_Activity extends AppCompatActivity {
             }
         };
 
-        final DialogInterface.OnDismissListener listenerDismiss = new DialogInterface.OnDismissListener() {
+        final DialogInterface.OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
                 startActivity( new Intent(ReceiveRecipe_Activity.this, Main_Activity.class));
@@ -86,7 +123,7 @@ public class ReceiveRecipe_Activity extends AppCompatActivity {
         dialog.setTitle("Success!");
         dialog.setMessage("The recipe '"+ recipeName +"' downloaded successfully.");
         dialog.setPositiveButton("Ok", listener);
-        dialog.setOnDismissListener(listenerDismiss);
+        dialog.setOnDismissListener(dismissListener);
         dialog.show();
     }
 }

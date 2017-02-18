@@ -11,6 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,20 +51,20 @@ public class Main_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recipes = new ArrayList<>();
         File recipeDir = new File(getFilesDir().getAbsolutePath() + "/recipes");
         if (!recipeDir.exists()) {
             recipeDir.mkdir();
         }
-        for (String s : recipeDir.list()) {
-            recipes.add( new Recipe(this, s) );
+        recipes = new ArrayList<>();
+        for (File file : recipeDir.listFiles()) {
+            recipes.add( new Recipe(file) );
         }
-        //Collections.sort(recipes);
+        Collections.sort(recipes);
 
-        ListView lv = (ListView) findViewById(R.id.Main_RecipeList);
+        ListView listView = (ListView) findViewById(R.id.Main_RecipeList);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipes);
-        lv.setAdapter(adapter);
-        this.setListViewListeners(lv);
+        listView.setAdapter(adapter);
+        this.setListViewListeners(listView);
     }
 
     /**
@@ -125,7 +131,7 @@ public class Main_Activity extends AppCompatActivity {
                 deletionFile = new File(getFilesDir() + "/recipes/" + recipeName);
                 dialog.setMessage("Are you sure you want to delete " + recipeName + "?");
                 dialog.setTitle("Confirm deletion");
-                dialog.setNegativeButton("No", null);
+                dialog.setNegativeButton("Cancel", null);
                 dialog.setPositiveButton("Yes", dialogListener);
                 dialog.show();
                 return true;

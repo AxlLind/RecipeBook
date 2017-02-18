@@ -5,4 +5,7 @@
     Your friend downloading the recipe will have to enter the same download code to receive it!</string>
     <string name="receive_instrutions">Your friend sharing the recipe will have to upload it before
     you try to download it. Enter the same download code as the one your friend entered.</string>
+    <string name="downloadError_NoDLName">You have need to specify a download code.</string>
+    <string name="downloadError_NoRecipe">Cannot find recipe in database. Make sure the other user sends it first.
+        Double check you entered the correct download code.</string>
 </resources>

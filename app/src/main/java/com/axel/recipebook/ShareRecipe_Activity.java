@@ -19,12 +19,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.zip.DeflaterInputStream;
 
+/**
+ * An activity where the user can send a recipe to a friend.
+ * Works by uploading the recipe to a firebase database which the friend then
+ * reads from.
+ */
 public class ShareRecipe_Activity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference dataref;
     private ArrayList<Recipe> recipes;
     private Recipe selectedRecipe;
 
+    /**
+     * Called when the activity is created.
+     * Reads in every saved recipe and populates a spinner view object where
+     * the user can select which recipe to send.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +47,8 @@ public class ShareRecipe_Activity extends AppCompatActivity {
 
         File recipeDir = new File(getFilesDir().getAbsolutePath() + "/recipes");
         recipes = new ArrayList<>();
-        for (String s : recipeDir.list()) {
-            recipes.add( new Recipe(this, s) );
+        for (File f : recipeDir.listFiles()) {
+            recipes.add( new Recipe(f) );
         }
         Collections.sort(recipes);
         recipes.add( new Recipe("Select Recipe...") ); // BS solution?
@@ -63,6 +75,15 @@ public class ShareRecipe_Activity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Called when clicking the "Share Recipe"-button.
+     * Checks that the user has selected a recipe and has filled in a download code.
+     * Shows an error dialog if the user has not.
+     * Otherwise it uploads the selected recipe to the firebase database and shows a
+     * success-dialog.
+     *
+     * @param view
+     */
     public void onClickShare(View view) {
         EditText et = (EditText) findViewById(R.id.DownloadNameEditText);
         String dlName = et.getText().toString().trim();
@@ -73,10 +94,16 @@ public class ShareRecipe_Activity extends AppCompatActivity {
             showErrorDialog("Error Sending", "You need to enter a download code.");
             return;
         }
-        dataref.child("sendingHub").child(dlName).setValue(selectedRecipe);
+        dataref.child(dlName).setValue(selectedRecipe);
         showSentDialog();
     }
 
+    /**
+     * Shows an error dialog on the screen.
+     *
+     * @param title title of the dialog
+     * @param msg message of the dialog
+     */
     private void showErrorDialog(String title, String msg) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(title);
@@ -85,6 +112,9 @@ public class ShareRecipe_Activity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Shows a dialog when the selected recipe was successfully uploaded to the database.
+     */
     private void showSentDialog() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 

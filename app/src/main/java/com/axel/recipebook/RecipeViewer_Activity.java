@@ -11,6 +11,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.io.File;
+
 import me.grantland.widget.AutofitTextView;
 
 /**
@@ -40,7 +42,8 @@ public class RecipeViewer_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_viewer);
 
         String recipeName = getIntent().getExtras().getString("recipeName");
-        recipe = new Recipe(this, recipeName);
+        File recipeFile = new File(getFilesDir().getAbsolutePath() + "/recipes/" + recipeName);
+        recipe = new Recipe(recipeFile);
 
         TextView recipeNameView = (TextView) findViewById(R.id.RecipeViewer_RecipeName);
         recipeNameView.setText(recipe.getName());
