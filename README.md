@@ -15,6 +15,12 @@ The app saves each recipe so they remain when you close the app or update it.
 
 4. The user can send their favorite recipes to their friends! Works behind the scenes using a firebase database.
 
+#### Pictures
+![alt-text](http://imgur.com/NBOkpACm.png "")
+![alt-text](http://imgur.com/MWSlU7gm.png "")
+![alt-text](http://imgur.com/AlqjpwRm.png "")
+![alt-text](http://imgur.com/iDi54Ykm.png "")
+
 ####Download
 
 Only works for android!
