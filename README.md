@@ -4,7 +4,7 @@ The idea behind the app is to help me and my girlfriend shop for our recipes.
 Most of them are in our heads so it's easy to forget one or two ingredients in the recipe but with the help of this app
 that shouldn't be a problem anymore!
 
-####Functionality
+#### Functionality
 
 1. The user can store recipe information such as name, and name and amount of each ingredient.
 The app saves each recipe so they remain when you close the app or update it.
@@ -15,13 +15,13 @@ The app saves each recipe so they remain when you close the app or update it.
 
 4. The user can send their favorite recipes to their friends! Works behind the scenes using a firebase database.
 
-#### Pictures
+#### Screenshots
 ![alt-text](http://imgur.com/NBOkpACm.png "")
 ![alt-text](http://imgur.com/MWSlU7gm.png "")
 ![alt-text](http://imgur.com/AlqjpwRm.png "")
 ![alt-text](http://imgur.com/iDi54Ykm.png "")
 
-####Download
+#### Download
 
 Only works for android!
 You can download the APK for the app by [clicking here](https://github.com/AxlLind/RecipeBook/raw/master/RecipeBook.apk).
